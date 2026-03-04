@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Sight — Brand & Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:    #1A1A1A;
+    --amber:    #E8A020;
+    --amber-lt: #FDF3E0;
+    --surface:  #F5F3EF;
+    --white:    #FFFFFF;
+    --text:     #2C2C2C;
+    --muted:    #8C8C8C;
+    --border:   #E0DDD8;
+
+    --sp1: 8px;  --sp2: 16px; --sp3: 24px;
+    --sp4: 32px; --sp5: 48px; --sp6: 64px; --sp7: 96px;
+
+    --font-sans:  'Inter', sans-serif;
+    --font-serif: 'DM Serif Display', serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  .ds-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--black);
+    display: flex; align-items: center; gap: var(--sp4);
+    padding: var(--sp2) var(--sp5);
+    border-bottom: 2px solid var(--amber);
+  }
+  .ds-nav-logo { font-family: var(--font-serif); color: var(--white); font-size: 20px; letter-spacing: -0.3px; }
+  .ds-nav-logo span { color: var(--amber); }
+  .ds-nav-links { display: flex; gap: var(--sp3); margin-left: auto; }
+  .ds-nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .5px; text-transform: uppercase; transition: color .2s; }
+  .ds-nav-links a:hover { color: var(--white); }
+
+  /* ── LAYOUT ── */
+  .ds-page { max-width: 1100px; margin: 0 auto; padding: var(--sp6) var(--sp4); }
+  .ds-section { margin-bottom: var(--sp7); }
+  .ds-section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--amber);
+    margin-bottom: var(--sp2);
+  }
+  .ds-section-title {
+    font-family: var(--font-serif); font-size: 36px;
+    color: var(--black); line-height: 1.15; margin-bottom: var(--sp3);
+  }
+  .ds-divider { border: none; border-top: 1px solid var(--border); margin: var(--sp5) 0; }
+
+  /* ── HERO PREVIEW ── */
+  .hero {
+    background: var(--black); color: var(--white);
+    padding: var(--sp7) var(--sp6);
+    border-radius: 4px; margin-bottom: var(--sp4);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: var(--amber); border-radius: 50%; opacity: .12;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--amber); margin-bottom: var(--sp3);
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05; letter-spacing: -1px; max-width: 700px;
+    margin-bottom: var(--sp3);
+  }
+  .hero p {
+    font-size: 18px; color: #BCBCBC; max-width: 520px;
+    line-height: 1.6; margin-bottom: var(--sp4);
+  }
+  .hero-cta-row { display: flex; gap: var(--sp2); flex-wrap: wrap; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-sans); font-size: 14px; font-weight: 600;
+    letter-spacing: .3px; padding: 14px 28px;
+    border-radius: 3px; border: none; cursor: pointer;
+    text-decoration: none; transition: all .2s;
+  }
+  .btn-primary { background: var(--amber); color: var(--black); }
+  .btn-primary:hover { background: #D4901A; }
+  .btn-ghost { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.25); }
+  .btn-ghost:hover { border-color: var(--white); }
+  .btn-dark { background: var(--black); color: var(--white); }
+  .btn-dark:hover { background: #2e2e2e; }
+  .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
+  .btn-outline:hover { background: var(--black); color: var(--white); }
+
+  /* ── COLOUR SWATCHES ── */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--sp2); }
+  .swatch { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: var(--sp2); background: var(--white); }
+  .swatch-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .swatch-hex { font-size: 12px; color: var(--muted); font-family: monospace; }
+  .swatch-use { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ── TYPE SCALE ── */
+  .type-row { display: flex; align-items: baseline; gap: var(--sp3); padding: var(--sp3) 0; border-bottom: 1px solid var(--border); }
+  .type-meta { min-width: 160px; }
+  .type-meta-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .type-meta-spec { font-size: 11px; color: var(--muted); font-family: monospace; margin-top: 2px; }
+
+  /* ── SPACING ── */
+  .spacing-grid { display: flex; flex-direction: column; gap: var(--sp2); }
+  .spacing-row { display: flex; align-items: center; gap: var(--sp3); }
+  .spacing-bar-wrap { display: flex; align-items: center; }
+  .spacing-bar { background: var(--amber); height: 20px; border-radius: 2px; }
+  .spacing-label { font-size: 13px; font-weight: 600; min-width: 40px; }
+  .spacing-val { font-size: 12px; color: var(--muted); font-family: monospace; margin-left: var(--sp2); }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--sp3); }
+  .card { background: var(--white); border-radius: 4px; border: 1px solid var(--border); padding: var(--sp4); }
+  .card-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--amber); margin-bottom: var(--sp2); }
+  .card h3 { font-family: var(--font-serif); font-size: 22px; color: var(--black); margin-bottom: var(--sp2); line-height: 1.2; }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+  .card-dark { background: var(--black); border-color: var(--black); }
+  .card-dark .card-label { color: var(--amber); }
+  .card-dark h3 { color: var(--white); }
+  .card-dark p { color: #999; }
+
+  /* ── PULLQUOTE ── */
+  .pullquote {
+    border-left: 3px solid var(--amber);
+    padding: var(--sp3) var(--sp4);
+    background: var(--amber-lt);
+    border-radius: 0 4px 4px 0;
+    margin: var(--sp4) 0;
+  }
+  .pullquote p { font-family: var(--font-serif); font-size: 22px; line-height: 1.35; color: var(--black); font-style: italic; }
+
+  /* ── NAV COMPONENT ── */
+  .nav-preview {
+    background: var(--black); padding: var(--sp2) var(--sp4);
+    display: flex; align-items: center; border-radius: 4px;
+    border: 1px solid #333;
+  }
+  .nav-logo { font-family: var(--font-serif); color: var(--white); font-size: 18px; }
+  .nav-logo span { color: var(--amber); }
+  .nav-links { display: flex; gap: var(--sp3); margin-left: auto; }
+  .nav-links a { color: var(--muted); font-size: 13px; font-weight: 500; text-decoration: none; letter-spacing: .3px; }
+  .nav-links .nav-cta { color: var(--amber); }
+
+  /* ── BADGE / TAG ── */
+  .tag { display: inline-block; padding: 4px 12px; border-radius: 2px; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+  .tag-amber { background: var(--amber-lt); color: #9A6A00; border: 1px solid #F0C060; }
+  .tag-dark { background: var(--black); color: var(--white); }
+  .tag-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+
+  /* ── FORM ELEMENTS ── */
+  .input-group { display: flex; flex-direction: column; gap: var(--sp1); margin-bottom: var(--sp3); }
+  .input-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .input-field {
+    padding: 12px 16px; border: 1.5px solid var(--border);
+    border-radius: 3px; font-family: var(--font-sans); font-size: 15px;
+    background: var(--white); color: var(--text); outline: none;
+    transition: border-color .2s;
+  }
+  .input-field:focus { border-color: var(--amber); }
+
+  /* ── STAT ROW ── */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp3); }
+  .stat { padding: var(--sp4); background: var(--white); border-radius: 4px; border: 1px solid var(--border); }
+  .stat-number { font-family: var(--font-serif); font-size: 48px; color: var(--amber); line-height: 1; margin-bottom: var(--sp1); }
+  .stat-label { font-size: 14px; color: var(--muted); }
+
+  /* ── SECTION (WEBSITE) ── */
+  .site-section { background: var(--white); padding: var(--sp6) var(--sp5); border-radius: 4px; margin-bottom: var(--sp3); }
+  .site-section.dark { background: var(--black); }
+
+  /* ── UTIL ── */
+  .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: var(--sp2); display: block; }
+  .mt2 { margin-top: var(--sp2); }
+  .mt3 { margin-top: var(--sp3); }
+  .mt4 { margin-top: var(--sp4); }
+  .flex-gap2 { display: flex; gap: var(--sp2); flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<nav class="ds-nav">
+  <div class="ds-nav-logo">Second<span>Sight</span></div>
+  <div class="ds-nav-links">
+    <a href="#colours">Colours</a>
+    <a href="#type">Typography</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#components">Components</a>
+    <a href="#pages">Page Previews</a>
+  </div>
+</nav>
+
+<div class="ds-page">
+
+  <div class="ds-section">
+    <div class="ds-section-label">Brand & Design System</div>
+    <h1 class="ds-section-title">Second Sight<br>Visual Identity</h1>
+    <p style="font-size:17px; color:var(--muted); max-width:540px;">
+      This document defines the visual language for Second Sight — colours, type, spacing, components, and page structure. Everything needed to build a consistent, credible website.
+    </p>
+  </div>
+
+  <hr class="ds-divider">
+
+  <div class="ds-section" id="colours">
+    <div class="ds-section-label">01 — Colour System</div>
+    <h2 class="ds-section-title">Palette</h2>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#1A1A1A;"></div><div class="swatch-info"><div class="swatch-name">Black</div><div class="swatch-hex">#1A1A1A</div><div class="swatch-use">Backgrounds, headlines</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E8A020;"></div><div class="swatch-info"><div class="swatch-name">Amber</div><div class="swatch-hex">#E8A020</div><div class="swatch-use">Accent, CTAs, highlights</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F5F3EF;"></div><div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-hex">#F5F3EF</div><div class="swatch-use">Page background</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FFFFFF; border:1px solid #eee;"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-use">Cards, content sections</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#2C2C2C;"></div><div class="swatch-info"><div class="swatch-name">Text</div><div class="swatch-hex">#2C2C2C</div><div class="swatch-use">Body copy</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#8C8C8C;"></div><div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-hex">#8C8C8C</div><div class="swatch-use">Captions, labels, secondary</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E0DDD8;"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#E0DDD8</div><div class="swatch-use">Dividers, card borders</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FDF3E0;"></div><div class="swatch-info"><div class="swatch-name">Amber Light</div><div class="swatch-hex">#FDF3E0</div><div class="swatch-use">Callouts, highlights</div></div></div>
+    </div>
+    <div class="pullquote mt4">
+      <p>"The palette is restrained by design. Black and amber do the work. Everything else gets out of the way."</p>
+    </div>
+  </div>
+
+  <hr class="ds-divider">
+
+  <div class="ds-section" id="type">
+    <div class="ds-section-label">02 — Typography</div>
+    <h2 class="ds-section-title">Type Scale</h2>
+    <p style="color:var(--muted); margin-bottom:var(--sp4);">Two typefaces only. <strong>DM Serif Display</strong> for headlines — warm, editorial, distinctive. <strong>Inter</strong> for everything else — clean, legible, no noise.</p>
+
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">Display</div><div class="type-meta-spec">DM Serif / 64px / -1px</div></div>
+      <div style="font-family:'DM Serif Display'; font-size:clamp(36px,5vw,64px); line-height:1.05; letter-spacing:-1px; color:var(--black);">From mandate to momentum.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">H1</div><div class="type-meta-spec">DM Serif / 48px / -0.5px</div></div>
+      <div style="font-family:'DM Serif Display'; font-size:clamp(28px,4vw,48px); line-height:1.1; letter-spacing:-0.5px; color:var(--black);">Your AI strategy exists. Now make it move.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">H2</div><div class="type-meta-spec">DM Serif / 36px / 0px</div></div>
+      <div style="font-family:'DM Serif Display'; font-size:clamp(24px,3vw,36px); line-height:1.15; color:var(--black);">How it works</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">H3</div><div class="type-meta-spec">Inter 600 / 22px</div></div>
+      <div style="font-size:22px; font-weight:600; color:var(--black);">Execution over strategy</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">Body Large</div><div class="type-meta-spec">Inter 400 / 18px / 1.6lh</div></div>
+      <div style="font-size:18px; line-height:1.6; color:var(--text); max-width:500px;">We run structured 1–2 day workshops that give senior leaders a clear action plan — fast in, fast out.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">Body</div><div class="type-meta-spec">Inter 400 / 16px / 1.65lh</div></div>
+      <div style="font-size:16px; line-height:1.65; color:var(--text); max-width:500px;">No 80-slide decks. No 6-month engagements. Just a clear diagnosis of where your AI execution is breaking down — and a prioritised plan to fix it.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">Label</div><div class="type-meta-spec">Inter 600 / 11px / 2px tracking</div></div>
+      <div style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--amber);">AI Activation Workshop</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="type-meta-label">Caption</div><div class="type-meta-spec">Inter 400 / 13px</div></div>
+      <div style="font-size:13px; color:var(--muted);">Ex-Accenture rigour. Without the timeline or price tag.</div>
+    </div>
+  </div>
+
+  <hr class="ds-divider">
+
+  <div class="ds-section" id="spacing">
+    <div class="ds-section-label">03 — Spacing System</div>
+    <h2 class="ds-section-title">8px Grid</h2>
+    <p style="color:var(--muted); margin-bottom:var(--sp4);">All spacing is based on an 8px unit. Use multiples only — don't freestyle it.</p>
+    <div class="spacing-grid">
+      <div class="spacing-row"><span class="spacing-label">sp1</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div><span class="spacing-val">8px — tight gaps, inline elements</span></div></div>
+      <div class="spacing-row"><span class="spacing-label">sp2</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div><span class="spacing-val">16px — card padding (small), stacked labels</span></div></div>
+      <div class="spacing-row"><span class="spacing-label">sp3</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div><span class="spacing-val">24px — between related elements</span></div></div>
+      <div class="spacing-row"><span class="spacing-label">sp4</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div><span class="spacing-val">32px — card padding, section sub-gaps</span></div></div>
+      <div class="spacing-row"><span class="spacing-label">sp5</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48px;"></div><span class="spacing-val">48px — between sections (mobile)</span></div></div>
+      <div class="spacing-row"><span class="spacing-label">sp6</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div><span class="spacing-val">64px — section padding (desktop)</span></div></div>
+      <div class="spacing-row"><span class="spacing-label">sp7</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div><span class="spacing-val">96px — hero padding, major section gaps</span></div></div>
+    </div>
+    <div class="mt4" style="background:var(--white); border:1px solid var(--border); border-radius:4px; padding:var(--sp4);">
+      <span class="label">Container widths</span>
+      <p style="font-size:14px; color:var(--muted); line-height:1.7;">
+        <strong style="color:var(--text);">Max content width:</strong> 1100px<br>
+        <strong style="color:var(--text);">Narrow / reading width:</strong> 680px<br>
+        <strong style="color:var(--text);">Side padding (desktop):</strong> 48px<br>
+        <strong style="color:var(--text);">Side padding (mobile):</strong> 20px<br>
+        <strong style="color:var(--text);">Border radius:</strong> 3–4px (subtle, not rounded)
+      </p>
+    </div>
+  </div>
+
+  <hr class="ds-divider">
+
+  <div class="ds-section" id="components">
+    <div class="ds-section-label">04 — Components</div>
+    <h2 class="ds-section-title">UI Elements</h2>
+
+    <span class="label">Buttons</span>
+    <div class="flex-gap2 mt2">
+      <a class="btn btn-primary" href="#">See how it works</a>
+      <a class="btn btn-dark" href="#">Book a call</a>
+      <a class="btn btn-outline" href="#">Learn more</a>
+      <a class="btn btn-ghost" href="#" style="background:var(--black);">Ghost (on dark)</a>
+    </div>
+
+    <span class="label mt4">Tags / Badges</span>
+    <div class="flex-gap2 mt2">
+      <span class="tag tag-amber">AI Activation</span>
+      <span class="tag tag-dark">Workshop</span>
+      <span class="tag tag-outline">1–2 Days</span>
+    </div>
+
+    <span class="label mt4">Navigation</span>
+    <div class="nav-preview mt2">
+      <div class="nav-logo">Second<span style="color:var(--amber);">Sight</span></div>
+      <div class="nav-links">
+        <a href="#">How it works</a>
+        <a href="#">About</a>
+        <a href="#" class="nav-cta">Book a call →</a>
+      </div>
+    </div>
+
+    <span class="label mt4">Cards</span>
+    <div class="card-grid mt2">
+      <div class="card">
+        <div class="card-label">Pillar 01</div>
+        <h3>Execution over strategy</h3>
+        <p>Having a strategy is table stakes. Getting it moving is the hard part. We don't add to the strategy pile — we clear it.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Pillar 02</div>
+        <h3>Speed to value</h3>
+        <p>In and out in 1–2 days. Senior leaders leave with a prioritised action plan and quick wins they can move on immediately.</p>
+      </div>
+      <div class="card card-dark">
+        <div class="card-label">Pillar 03</div>
+        <h3 style="color:var(--white);">Senior credibility</h3>
+        <p>Ex-Big 4 rigour. Without the Big 4 timeline or price tag.</p>
+      </div>
+    </div>
+
+    <span class="label mt4">Pull Quote</span>
+    <div class="pullquote">
+      <p>"Most AI strategies don't fail. They stall. We fix the stall."</p>
+    </div>
+
+    <span class="label mt4">Stats / Numbers</span>
+    <div class="stat-row mt2">
+      <div class="stat"><div class="stat-number">1–2</div><div class="stat-label">Days per workshop</div></div>
+      <div class="stat"><div class="stat-number">3</div><div class="stat-label">Pilot workshops to validate</div></div>
+      <div class="stat"><div class="stat-number">0</div><div class="stat-label">Slide decks left behind</div></div>
+    </div>
+
+    <span class="label mt4">Form Elements</span>
+    <div style="max-width:400px; background:var(--white); border:1px solid var(--border); border-radius:4px; padding:var(--sp4); margin-top:var(--sp2);">
+      <div class="input-group">
+        <label class="input-label">Your name</label>
+        <input class="input-field" type="text" placeholder="Jesse Botella">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Company email</label>
+        <input class="input-field" type="email" placeholder="jesse@secondsight.com.au">
+      </div>
+      <a class="btn btn-primary" href="#" style="width:100%; justify-content:center;">Book a discovery call</a>
+    </div>
+  </div>
+
+  <hr class="ds-divider">
+
+  <div class="ds-section" id="pages">
+    <div class="ds-section-label">05 — Page Previews</div>
+    <h2 class="ds-section-title">Website Sections</h2>
+
+    <span class="label">Hero Section</span>
+    <div class="hero mt2">
+      <div class="hero-eyebrow">AI Activation Workshop</div>
+      <h1>Your AI strategy exists.<br>Now make it move.</h1>
+      <p>Second Sight runs structured workshops that turn AI mandates into momentum — in one to two days.</p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="#">See how it works</a>
+        <a class="btn btn-ghost" href="#">Book a call →</a>
+      </div>
+    </div>
+
+    <span class="label mt4">How It Works Section</span>
+    <div class="site-section mt2">
+      <div style="text-align:center; margin-bottom:var(--sp5);">
+        <div style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:var(--sp2);">The Process</div>
+        <h2 style="font-family:'DM Serif Display'; font-size:36px; color:var(--black);">Fast in. Clear out.</h2>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">Day 1 — Morning</div>
+          <h3>Diagnose</h3>
+          <p>We map where your AI execution is breaking down. No assumptions — we go in cold and find the real blockage.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Day 1 — Afternoon</div>
+          <h3>Decide</h3>
+          <p>We prioritise what matters. Quick wins identified. Longer plays scoped. A roadmap the room agrees on.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Day 2</div>
+          <h3>Activate</h3>
+          <p>You leave with a plan you can present upward and execute on Monday. No ambiguity. No waiting on a deck.</p>
+        </div>
+      </div>
+    </div>
+
+    <span class="label mt4">Dark CTA Section</span>
+    <div class="site-section dark mt2">
+      <div style="text-align:center;">
+        <div style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:var(--sp3);">Who it's for</div>
+        <h2 style="font-family:'DM Serif Display'; font-size:36px; color:var(--white); margin-bottom:var(--sp3);">Built for leaders under pressure to deliver.</h2>
+        <p style="font-size:17px; color:#999; max-width:500px; margin:0 auto var(--sp4);">CTOs and CPOs at Australian SMBs who have an AI strategy on paper and nothing moving on the ground.</p>
+        <a class="btn btn-primary" href="#">Book a discovery call</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
