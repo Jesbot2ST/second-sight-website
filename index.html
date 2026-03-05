@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Sight Group — AI Activation Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:    #1A1A1A;
+    --amber:    #E8A020;
+    --amber-lt: #FDF3E0;
+    --amber-dk: #C4851A;
+    --surface:  #F5F3EF;
+    --white:    #FFFFFF;
+    --text:     #2C2C2C;
+    --muted:    #8C8C8C;
+    --border:   #E0DDD8;
+    --font-sans:  'Inter', sans-serif;
+    --font-serif: 'DM Serif Display', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(26,26,26,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,160,32,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--white);
+    letter-spacing: -0.2px;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--amber); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--amber);
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 10px 22px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--amber-dk); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 48px 96px;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,160,32,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,160,32,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--amber);
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -1px;
+    color: var(--white);
+    max-width: 820px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.25s;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: #BCBCBC;
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.55s;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--amber);
+    color: var(--black);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 16px 32px;
+    border-radius: 3px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    background: var(--amber-dk);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,160,32,0.25);
+  }
+  .btn-primary .arrow {
+    transition: transform 0.2s;
+  }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+  .hero-note {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 72px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.7s;
+  }
+  .hero-stat-num {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat-label {
+    font-size: 12px;
+    color: #8C8C8C;
+    max-width: 160px;
+    line-height: 1.5;
+  }
+
+  /* ── SECTION BASE ── */
+  .section {
+    padding: 96px 48px;
+  }
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--amber);
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--amber-dk); }
+  .section-lead {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* ── PROBLEM ── */
+  .problem { background: var(--white); }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .problem-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    border-top: 3px solid var(--amber);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+  .stat-card-num {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-card-label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .stat-card-source {
+    font-size: 10px;
+    color: #C0C0C0;
+    margin-top: 8px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+  .problem-text p {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 20px;
+    line-height: 1.75;
+  }
+  .problem-text p:last-child { margin-bottom: 0; }
+  .problem-text strong { font-weight: 600; color: var(--black); }
+  .blocker-list {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .blocker-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--text);
+    padding: 14px 18px;
+    background: var(--surface);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .blocker-item:hover {
+    border-color: var(--amber);
+    background: var(--amber-lt);
+  }
+  .blocker-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+  }
+
+  /* ── OFFER ── */
+  .offer { background: var(--black); }
+  .offer .section-title { color: var(--white); }
+  .offer .section-lead { color: #BCBCBC; }
+  .offer-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    position: relative;
+    overflow: hidden;
+  }
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--amber);
+  }
+  .offer-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+  .offer-card-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .offer-card-desc {
+    font-size: 15px;
+    color: #BCBCBC;
+    line-height: 1.75;
+  }
+  .offer-details-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+  }
+  .offer-detail-row {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    align-items: flex-start;
+    transition: padding-left 0.2s;
+  }
+  .offer-detail-row:last-child { border-bottom: none; }
+  .offer-detail-row:hover { padding-left: 6px; }
+  .offer-detail-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(232,160,32,0.15);
+    border: 1px solid rgba(232,160,32,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--amber);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .offer-detail-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .offer-detail-text span {
+    font-size: 13px;
+    color: #8C8C8C;
+  }
+
+  /* ── PROCESS ── */
+  .process { background: var(--surface); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 16px;
+  }
+  .process-step {
+    background: var(--white);
+    padding: 36px 28px;
+    position: relative;
+    transition: background 0.25s, transform 0.25s;
+    cursor: default;
+  }
+  .process-step:hover {
+    background: var(--black);
+    transform: translateY(-6px);
+    z-index: 2;
+  }
+  .process-step:hover .step-num { color: rgba(232,160,32,0.2); }
+  .process-step:hover .step-title { color: var(--white); }
+  .process-step:hover .step-desc { color: #8C8C8C; }
+  .process-step:hover .step-bar { background: var(--amber); }
+  .step-bar {
+    height: 3px;
+    width: 32px;
+    background: var(--border);
+    margin-bottom: 24px;
+    transition: background 0.25s;
+  }
+  .step-num {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    color: #F0EDE8;
+    line-height: 1;
+    margin-bottom: 12px;
+    transition: color 0.25s;
+  }
+  .step-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--black);
+    margin-bottom: 10px;
+    transition: color 0.25s;
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    transition: color 0.25s;
+  }
+
+  /* ── DELIVERABLES ── */
+  .deliverables { background: var(--white); }
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .deliverable-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    background: var(--surface);
+  }
+  .deliverable-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 0;
+    background: var(--amber);
+    transition: height 0.3s ease;
+  }
+  .deliverable-card:hover {
+    border-color: var(--amber);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+  }
+  .deliverable-card:hover::after { height: 3px; }
+  .deliverable-num {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--amber);
+    font-weight: 400;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .deliverable-title {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    color: var(--black);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .deliverable-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── WHY SSG ── */
+  .why { background: var(--surface); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .why-credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .credential-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .credential-row:hover {
+    border-color: var(--amber);
+    transform: translateX(6px);
+  }
+  .credential-icon {
+    width: 36px; height: 36px;
+    border-radius: 3px;
+    background: var(--amber-lt);
+    border: 1px solid rgba(232,160,32,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .credential-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+  .credential-text span {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .why-differentiators {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .diff-item {
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.2s, padding-left 0.2s;
+  }
+  .diff-item:hover {
+    border-color: var(--amber);
+    padding-left: 24px;
+  }
+  .diff-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .diff-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── FAQ ── */
+  .faq { background: var(--white); }
+  .faq-list {
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 24px;
+    background: var(--surface);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+    transition: background 0.2s;
+  }
+  .faq-question:hover { background: var(--amber-lt); }
+  .faq-question.open { background: var(--black); color: var(--white); }
+  .faq-icon {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+    transition: transform 0.3s, background 0.2s;
+    color: var(--amber);
+  }
+  .faq-question.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    padding: 0 24px;
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.75;
+    background: var(--white);
+  }
+  .faq-answer.open {
+    max-height: 300px;
+    padding: 20px 24px 24px;
+  }
+
+  /* ── FORM ── */
+  .form-section {
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+  .form-glow {
+    position: absolute;
+    bottom: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,160,32,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .form-section .section-title { color: var(--white); }
+  .form-section .section-lead { color: #BCBCBC; }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .form-promise {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 8px;
+  }
+  .form-promise-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .promise-check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(232,160,32,0.15);
+    border: 1px solid rgba(232,160,32,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--amber);
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .promise-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .promise-text span {
+    font-size: 13px;
+    color: #8C8C8C;
+    line-height: 1.55;
+  }
+  .form-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 40px;
+    position: relative;
+  }
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--amber);
+    border-radius: 6px 6px 0 0;
+  }
+  .form-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .form-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8C8C8C;
+  }
+  .form-input, .form-select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px;
+    padding: 12px 16px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  .form-input::placeholder { color: rgba(255,255,255,0.25); }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--amber);
+    background: rgba(232,160,32,0.06);
+  }
+  .form-select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C8C8C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .form-select option { background: var(--black); color: var(--white); }
+  .form-submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--amber);
+    color: var(--black);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 16px 32px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .form-submit:hover {
+    background: var(--amber-dk);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,160,32,0.3);
+  }
+  .form-disclaimer {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--black);
+    border-top: 1px solid #2a2a2a;
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--amber); }
+  .footer-copy {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav { padding: 0 24px; }
+    .hero { padding: 100px 24px 72px; }
+    .section { padding: 72px 24px; }
+    .problem-grid, .why-grid, .form-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .deliverables-grid { grid-template-columns: 1fr 1fr; }
+    .offer-card { grid-template-columns: 1fr; padding: 32px; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 32px; }
+    .footer { padding: 24px; }
+  }
+  @media (max-width: 600px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .deliverables-grid { grid-template-columns: 1fr; }
+    .problem-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Second Sight <span>Group</span></a>
+  <a href="#book" class="nav-cta">Book a Discovery Call <span class="arrow">→</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">AI Activation Workshop</div>
+    <h1>From AI mandate<br>to measurable<br><em>momentum.</em></h1>
+    <p class="hero-sub">We help Australian mid-market leaders turn a stalled AI strategy into a clear action plan with visible next steps, in one to two days.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary">Book a Discovery Call <span class="arrow">→</span></a>
+      <span class="hero-note">No obligation. 30 minutes.</span>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">72%</div>
+        <div class="hero-stat-label">of Australian enterprises fail to achieve measurable AI ROI</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4%</div>
+        <div class="hero-stat-label">of Australian businesses are fully prepared to deploy AI</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">12%</div>
+        <div class="hero-stat-label">of AU leaders say AI is transforming their business vs 25% globally</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section problem" id="problem">
+  <div class="section-inner">
+    <div class="problem-grid">
+      <div>
+        <div class="section-eyebrow reveal">The Problem</div>
+        <h2 class="section-title reveal reveal-delay-1">The gap is not strategy.<br>It is <em>execution.</em></h2>
+        <div class="problem-text reveal reveal-delay-2">
+          <p>Most Australian mid-market businesses already have an AI strategy on paper. The real problem is that it is stalling at implementation. Teams are time-poor, adoption is inconsistent, and leaders lack a clear toolkit to move from intent to visible progress.</p>
+          <p>The cost of standing still is real. Australia is running at half the global AI transformation rate, and the window to get ahead of competitors is closing fast.</p>
+        </div>
+        <div class="blocker-list reveal reveal-delay-3">
+          <div class="blocker-item"><div class="blocker-dot"></div>Skills and capability gaps across the business</div>
+          <div class="blocker-item"><div class="blocker-dot"></div>No clear path from pilot to production</div>
+          <div class="blocker-item"><div class="blocker-dot"></div>Inconsistent adoption across teams</div>
+          <div class="blocker-item"><div class="blocker-dot"></div>No way to measure or present progress upward</div>
+          <div class="blocker-item"><div class="blocker-dot"></div>Legacy systems and data readiness holding things back</div>
+        </div>
+      </div>
+      <div class="problem-stats reveal reveal-delay-2">
+        <div class="stat-card">
+          <div class="stat-card-num">78%</div>
+          <div class="stat-card-label">of boards treat AI as a strategic priority</div>
+          <div class="stat-card-source">ADAPT, 2025</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">72%</div>
+          <div class="stat-card-label">fail to achieve measurable AI ROI</div>
+          <div class="stat-card-source">ADAPT, 2025</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">4%</div>
+          <div class="stat-card-label">of Australian businesses fully prepared to deploy AI</div>
+          <div class="stat-card-source">Cisco, 2024</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">28%</div>
+          <div class="stat-card-label">have moved 40% or more of AI pilots to production</div>
+          <div class="stat-card-source">Deloitte, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="section offer" id="offer">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal" style="color:var(--amber)">The Offer</div>
+    <h2 class="section-title reveal reveal-delay-1" style="color:var(--white)">The AI Activation Workshop</h2>
+    <p class="section-lead reveal reveal-delay-2">A focused one to two day engagement that takes senior leaders from AI mandate and unclear direction to a clear action plan with visible next steps.</p>
+    <div class="offer-card reveal reveal-delay-2">
+      <div>
+        <div class="offer-card-label">What it is</div>
+        <div class="offer-card-title">A structured working session designed to unlock execution.</div>
+        <p class="offer-card-desc">We run the room, not just hand over a deck. Working alongside your senior leadership team, we diagnose where execution is breaking down, prioritise what matters most, and leave you with a plan you can act on immediately and present upward with confidence.</p>
+        <p class="offer-card-desc" style="margin-top:16px">Designed for CTOs, CPOs, and senior technology or product leaders at Australian SMBs and mid-market companies of 50 to 500 employees.</p>
+      </div>
+      <div>
+        <div class="offer-details-label">What you walk away with</div>
+        <div class="offer-detail-row">
+          <div class="offer-detail-icon">1</div>
+          <div class="offer-detail-text">
+            <strong>AI Execution Diagnostic</strong>
+            <span>A clear picture of where your strategy is breaking down and why</span>
+          </div>
+        </div>
+        <div class="offer-detail-row">
+          <div class="offer-detail-icon">2</div>
+          <div class="offer-detail-text">
+            <strong>Prioritised Action Plan</strong>
+            <span>A plan you can present upward and act on immediately</span>
+          </div>
+        </div>
+        <div class="offer-detail-row">
+          <div class="offer-detail-icon">3</div>
+          <div class="offer-detail-text">
+            <strong>Quick Wins Identified</strong>
+            <span>Early momentum opportunities your team can move on within 30 days</span>
+          </div>
+        </div>
+        <div class="offer-detail-row">
+          <div class="offer-detail-icon">4</div>
+          <div class="offer-detail-text">
+            <strong>90-Day Roadmap</strong>
+            <span>A sequenced view of what comes next, with owners and milestones</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process" id="process">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">How It Works</div>
+    <h2 class="section-title reveal reveal-delay-1">Four stages.<br>One clear outcome.</h2>
+    <p class="section-lead reveal reveal-delay-2">We follow a proven engagement model built on consulting rigour and designed for speed.</p>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-bar"></div>
+        <div class="step-num">01</div>
+        <div class="step-title">Diagnose</div>
+        <div class="step-desc">We assess where your AI execution is breaking down — across people, process, data, and technology.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-bar"></div>
+        <div class="step-num">02</div>
+        <div class="step-title">Decide</div>
+        <div class="step-desc">We help your leadership team align on what matters most and make clear prioritisation decisions.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-bar"></div>
+        <div class="step-num">03</div>
+        <div class="step-title">Design</div>
+        <div class="step-desc">We shape a practical action plan with quick wins, owners, and a sequenced 90-day roadmap.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-bar"></div>
+        <div class="step-num">04</div>
+        <div class="step-title">Deliver</div>
+        <div class="step-desc">You leave with a plan you can act on immediately and present to your board or leadership team with confidence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="section deliverables" id="deliverables">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Deliverables</div>
+    <h2 class="section-title reveal reveal-delay-1">Tangible outputs.<br>Not another slide deck.</h2>
+    <p class="section-lead reveal reveal-delay-2">Every engagement produces a concrete set of working documents your team can use straight away.</p>
+    <div class="deliverables-grid">
+      <div class="deliverable-card reveal">
+        <div class="deliverable-num">01</div>
+        <div class="deliverable-title">AI Execution Diagnostic Report</div>
+        <div class="deliverable-desc">A structured assessment of where your strategy is stalling, with root causes identified across people, process, data, and technology.</div>
+      </div>
+      <div class="deliverable-card reveal reveal-delay-1">
+        <div class="deliverable-num">02</div>
+        <div class="deliverable-title">Prioritised Use-Case Matrix</div>
+        <div class="deliverable-desc">A scored and ranked view of your highest-value AI opportunities, with effort and impact mapped for each.</div>
+      </div>
+      <div class="deliverable-card reveal reveal-delay-2">
+        <div class="deliverable-num">03</div>
+        <div class="deliverable-title">Quick Wins Playbook</div>
+        <div class="deliverable-desc">Three to five immediate actions your team can execute within 30 days to build momentum and demonstrate early progress.</div>
+      </div>
+      <div class="deliverable-card reveal reveal-delay-3">
+        <div class="deliverable-num">04</div>
+        <div class="deliverable-title">90-Day Implementation Roadmap</div>
+        <div class="deliverable-desc">A sequenced plan with milestones, owners, and decision points that takes you from workshop to visible results.</div>
+      </div>
+      <div class="deliverable-card reveal reveal-delay-1">
+        <div class="deliverable-num">05</div>
+        <div class="deliverable-title">Executive Presentation</div>
+        <div class="deliverable-desc">A board-ready summary of findings, decisions, and next steps that you can present upward with confidence.</div>
+      </div>
+      <div class="deliverable-card reveal reveal-delay-2">
+        <div class="deliverable-num">06</div>
+        <div class="deliverable-title">Post-Workshop Support</div>
+        <div class="deliverable-desc">Two weeks of follow-up access to your Second Sight Group facilitator for questions, clarifications, and plan refinements.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SSG -->
+<section class="section why" id="why">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Why Second Sight Group</div>
+    <h2 class="section-title reveal reveal-delay-1">Consulting rigour.<br>Without the Big 4 <em>price tag.</em></h2>
+    <p class="section-lead reveal reveal-delay-2">We are a specialist AI advisory firm founded by ex-Accenture consultants who have worked across some of Australia's most complex organisations.</p>
+    <div class="why-grid">
+      <div class="why-credentials reveal reveal-delay-1">
+        <div class="credential-row">
+          <div class="credential-icon">🏛</div>
+          <div class="credential-text">
+            <strong>Ex-Accenture Consulting Background</strong>
+            <span>Senior strategy and delivery experience across Accenture Song, Sales and Commerce, and CX practices</span>
+          </div>
+        </div>
+        <div class="credential-row">
+          <div class="credential-icon">🏭</div>
+          <div class="credential-text">
+            <strong>Cross-Industry Depth</strong>
+            <span>Rail freight, chemicals, FMCG, financial services, insurance, and property development</span>
+          </div>
+        </div>
+        <div class="credential-row">
+          <div class="credential-icon">📈</div>
+          <div class="credential-text">
+            <strong>Commercial Focus</strong>
+            <span>Particular strength in sales, revenue, CRM, and B2B growth problems</span>
+          </div>
+        </div>
+        <div class="credential-row">
+          <div class="credential-icon">🇦🇺</div>
+          <div class="credential-text">
+            <strong>Australian Market Focus</strong>
+            <span>Built specifically for Australian SMBs and mid-market companies who need enterprise thinking at a practical scale</span>
+          </div>
+        </div>
+      </div>
+      <div class="why-differentiators reveal reveal-delay-2">
+        <div class="diff-item">
+          <div class="diff-title">We run the room, not just hand over a deck</div>
+          <div class="diff-desc">Workshop-led delivery means you get hands-on facilitation, live decision-making support, and a working session that actually produces outputs on the day.</div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-title">Faster to insight, faster to action</div>
+          <div class="diff-desc">We compress months of deliberation into one to two days. No extended discovery phases or drawn-out engagements before you see results.</div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-title">AI-native, not AI-adjacent</div>
+          <div class="diff-desc">We use AI to deliver better consulting, not to replace thinking. Our tools, frameworks, and processes are built around AI from the ground up.</div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-title">Focused on execution, not strategy</div>
+          <div class="diff-desc">We assume you already have a strategy. Our job is to help you actually move. Every output is designed to be acted on, not filed away.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Common Questions</div>
+    <h2 class="section-title reveal reveal-delay-1">Answered honestly.</h2>
+    <p class="section-lead reveal reveal-delay-2" style="margin-bottom:40px">The questions we hear most often from CTOs and CPOs before they book a call.</p>
+    <div class="faq-list reveal reveal-delay-2">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          We do not have a dedicated budget for this. Can we still engage?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Around 15% of Australian SMBs create budgets at the point of decision, meaning AI consulting often has no dedicated line item. In our discovery call, we help you identify the right budget home, whether that is technology, L&amp;D, transformation, or operations. We can also structure the engagement to fit within CTO discretionary spend where relevant.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Our team is technically strong. Why do we need outside help?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Internal capability is a genuine strength, not a reason to skip this. The most common blocker we see is not a skills gap but a prioritisation and alignment gap. Strong technical teams often have too many options on the table and no structured way to decide. We bring an outside lens, a proven framework, and the room facilitation skills to get your leadership team aligned in a way that internal stakeholders often cannot.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          We have had bad experiences with consultants in the past.
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">We hear this often and take it seriously. Most consulting engagements produce documents, not decisions. Our model is built around the opposite: we run working sessions that produce outputs on the day, every deliverable is designed to be acted on immediately, and we do not disappear after the workshop. The discovery call is a no-obligation conversation and a chance to test whether our approach is different from what you have experienced before.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How long does the engagement take from first call to workshop?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Typically four to six weeks from first conversation to running the workshop, including a pre-workshop diagnostic and preparation session with your team. For organisations with a clear mandate and single decision-maker, we have moved faster. We work around your calendar and pace the engagement to fit your business, not ours.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What happens after the workshop? Do we get ongoing support?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Every engagement includes two weeks of follow-up access to your facilitator for questions and refinements. For organisations that want ongoing implementation support, we offer extended engagement options. We will discuss what makes sense for your situation during the discovery call. Our goal is not dependency, it is momentum.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="section form-section" id="book">
+  <div class="form-glow"></div>
+  <div class="section-inner" style="position:relative;z-index:2">
+    <div class="section-eyebrow reveal" style="color:var(--amber)">Book a Discovery Call</div>
+    <h2 class="section-title reveal reveal-delay-1">Let us talk.</h2>
+    <p class="section-lead reveal reveal-delay-2">A 30-minute conversation to understand where you are, where you want to be, and whether we are the right fit to help you get there.</p>
+    <div class="form-grid">
+      <div class="form-promise reveal reveal-delay-1">
+        <div class="form-promise-item">
+          <div class="promise-check">✓</div>
+          <div class="promise-text">
+            <strong>No sales pitch</strong>
+            <span>A genuine conversation about your situation. If we are not the right fit, we will tell you.</span>
+          </div>
+        </div>
+        <div class="form-promise-item">
+          <div class="promise-check">✓</div>
+          <div class="promise-text">
+            <strong>30 minutes, no obligation</strong>
+            <span>You will leave with at least one useful insight regardless of whether we work together.</span>
+          </div>
+        </div>
+        <div class="form-promise-item">
+          <div class="promise-check">✓</div>
+          <div class="promise-text">
+            <strong>Speak directly with a founder</strong>
+            <span>Not a sales rep. The people on the call are the people who will run your workshop.</span>
+          </div>
+        </div>
+        <div class="form-promise-item">
+          <div class="promise-check">✓</div>
+          <div class="promise-text">
+            <strong>Response within one business day</strong>
+            <span>We confirm every request personally and suggest three times that work for you.</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-card reveal reveal-delay-2">
+        <div class="form-title">Book your call</div>
+        <div class="form-subtitle">Fill in your details and we will be in touch within one business day.</div>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input class="form-input" type="text" placeholder="Alex" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input class="form-input" type="text" placeholder="Chen" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Work Email</label>
+            <input class="form-input" type="email" placeholder="alex@company.com.au" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <input class="form-input" type="text" placeholder="Company name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Role</label>
+            <select class="form-select form-input" required>
+              <option value="" disabled selected>Select your role</option>
+              <option>CTO</option>
+              <option>CPO</option>
+              <option>CEO / MD</option>
+              <option>Head of Engineering</option>
+              <option>Head of Product</option>
+              <option>Other Senior Leader</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company Size</label>
+            <select class="form-select form-input" required>
+              <option value="" disabled selected>Select company size</option>
+              <option>50 to 100 employees</option>
+              <option>100 to 250 employees</option>
+              <option>250 to 500 employees</option>
+              <option>500 or more employees</option>
+            </select>
+          </div>
+          <button type="submit" class="form-submit" id="submit-btn">
+            Book My Discovery Call <span>→</span>
+          </button>
+        </form>
+        <p class="form-disclaimer">We will never share your details. This is a direct line to the Second Sight Group founding team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Second Sight <span>Group</span></div>
+  <div class="footer-copy">© 2026 Second Sight Group. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.classList.remove('open');
+      q.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Request received. We will be in touch.';
+    btn.style.background = '#1A6B35';
+    btn.style.color = '#fff';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
