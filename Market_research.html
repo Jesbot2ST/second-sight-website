@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Sight — AI Activation Market Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:    #1A1A1A;
+    --amber:    #E8A020;
+    --amber-lt: #FDF3E0;
+    --amber-dk: #C4851A;
+    --surface:  #F5F3EF;
+    --white:    #FFFFFF;
+    --text:     #2C2C2C;
+    --muted:    #8C8C8C;
+    --border:   #E0DDD8;
+    --card:     #FFFFFF;
+
+    --sp1: 8px;  --sp2: 16px; --sp3: 24px;
+    --sp4: 32px; --sp5: 48px; --sp6: 64px; --sp7: 96px;
+
+    --font-sans:  'Inter', sans-serif;
+    --font-serif: 'DM Serif Display', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--black);
+    color: var(--white);
+    overflow: hidden;
+    position: relative;
+  }
+  .masthead::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--amber);
+  }
+  .masthead-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 40px 68px;
+    position: relative;
+    z-index: 2;
+  }
+  .masthead-bg-text {
+    position: absolute;
+    right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-serif);
+    font-size: 220px;
+    color: rgba(255,255,255,0.025);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1;
+    line-height: 1;
+    user-select: none;
+  }
+  .masthead-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: var(--sp4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .masthead-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--amber);
+  }
+  .masthead h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(36px, 5vw, 66px);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.5px;
+    max-width: 760px;
+    margin-bottom: var(--sp4);
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .masthead-meta {
+    display: flex;
+    gap: var(--sp4);
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .masthead-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .masthead-meta span::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+  }
+
+  /* ── NAV ── */
+  .nav-bar {
+    background: var(--black);
+    border-top: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0; z-index: 100;
+    overflow-x: auto;
+  }
+  .nav-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+  }
+  .nav-bar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .nav-bar a:hover { color: var(--white); border-bottom-color: var(--amber); }
+
+  /* ── EXEC SUMMARY ── */
+  .exec-summary {
+    background: var(--black);
+    color: var(--white);
+    padding: 56px 40px;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .exec-summary-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .exec-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: var(--sp2);
+  }
+  .exec-summary h2 {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: var(--sp2);
+  }
+  .exec-summary p {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #BCBCBC;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp2);
+  }
+  .stat-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 20px;
+  }
+  .stat-num {
+    font-family: var(--font-serif);
+    font-size: 38px;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 12px; color: #8C8C8C; line-height: 1.5; }
+
+  /* ── MAIN LAYOUT ── */
+  .main-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 96px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-top: 72px;
+    padding-top: 56px;
+    border-top: 1px solid var(--border);
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .section-num {
+    font-family: var(--font-serif);
+    font-size: 72px;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+  .section h2 {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.2;
+  }
+
+  /* ── EVIDENCE BADGE ── */
+  .evidence-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 3px;
+    margin-bottom: 28px;
+  }
+  .evidence-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .evidence-badge.strong { background: #E8F5EC; color: #1A6B35; }
+  .evidence-badge.medium { background: var(--amber-lt); color: var(--amber-dk); }
+  .evidence-badge.thin   { background: #FDECEC; color: #8B1A1A; }
+
+  /* ── BODY TEXT ── */
+  .body-text p { margin-bottom: 18px; color: var(--text); }
+  .body-text p:last-child { margin-bottom: 0; }
+  .body-text strong { font-weight: 600; color: var(--black); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--black);
+    color: var(--white);
+    padding: 28px 32px;
+    border-radius: 4px;
+    margin: 32px 0;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid var(--amber);
+  }
+  .callout::before {
+    content: '"';
+    position: absolute;
+    right: 24px; top: -10px;
+    font-family: var(--font-serif);
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+  }
+  .callout p {
+    font-size: 16px;
+    line-height: 1.65;
+    font-weight: 300;
+    position: relative;
+    color: #E0E0E0;
+  }
+  .callout strong { color: var(--amber); font-weight: 600; }
+  .callout-source {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── DATA CARDS ── */
+  .data-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp2);
+    margin: 32px 0;
+  }
+  .data-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    border-top: 3px solid var(--amber);
+  }
+  .data-card-num {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .data-card-label { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .data-card-source {
+    font-size: 10px;
+    color: #BCBCBC;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  /* ── COMPETITOR TABLE ── */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 13.5px;
+  }
+  .comp-table th {
+    background: var(--black);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  .comp-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .comp-table tr:nth-child(even) td { background: #FAFAF8; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .tier-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .tier-1 { background: #F0E8FF; color: #4A1A7A; }
+  .tier-2 { background: var(--amber-lt); color: var(--amber-dk); }
+
+  /* ── TWO COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp4);
+    margin: 32px 0;
+  }
+  .info-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+  }
+  .info-block h4 {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    color: var(--black);
+  }
+  .info-block ul { padding-left: 18px; }
+  .info-block li { margin-bottom: 9px; font-size: 13.5px; color: var(--text); }
+  .info-block li strong { font-weight: 600; color: var(--black); }
+  .info-block p { font-size: 13.5px; color: var(--text); line-height: 1.7; }
+
+  /* ── PRICING ── */
+  .pricing-band {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+  .pricing-band h4 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    color: var(--black);
+  }
+  .pricing-band .sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .price-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp2);
+    margin-top: 24px;
+  }
+  .price-tier {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    position: relative;
+  }
+  .price-tier.featured {
+    border-color: var(--amber);
+    background: var(--amber-lt);
+  }
+  .price-tier.featured::before {
+    content: 'CORE OFFER';
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background: var(--amber);
+    color: var(--black);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 3px;
+  }
+  .tier-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .tier-price {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .tier-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .tier-note { font-size: 12px; color: #6A6A6A; line-height: 1.55; }
+
+  /* ── RISKS ── */
+  .risk-list { margin: 32px 0; }
+  .risk-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .risk-item:last-child { border-bottom: none; }
+  .risk-num {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    color: var(--border);
+    line-height: 1;
+    text-align: center;
+  }
+  .risk-content h4 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--amber-dk);
+    margin-bottom: 8px;
+  }
+  .risk-content p { font-size: 14px; color: var(--text); margin-bottom: 12px; }
+  .mitigation-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #1A6B35;
+    background: #E8F5EC;
+    padding: 5px 12px;
+    border-radius: 3px;
+  }
+  .mitigation-tag::before { content: '→'; }
+
+  /* ── CHANNEL GRID ── */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp2);
+    margin: 32px 0;
+  }
+  .channel-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    border-left: 3px solid var(--black);
+  }
+  .channel-priority {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+  .channel-card h4 {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+  .channel-card p { font-size: 13px; color: #4A4A4A; line-height: 1.65; }
+
+  /* ── ASSUMPTION BLOCK ── */
+  .assumption-block {
+    background: var(--amber-lt);
+    border: 1px solid #E0C070;
+    border-left: 4px solid var(--amber);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .assumption-block h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--amber-dk);
+    margin-bottom: 14px;
+  }
+  .assumption-block ul { padding-left: 18px; }
+  .assumption-block li { margin-bottom: 10px; font-size: 14px; color: #3A2A00; line-height: 1.65; }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    background: var(--black);
+    color: #6A6A6A;
+    padding: 32px 40px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 80px;
+    border-top: 3px solid var(--amber);
+  }
+  .report-footer strong { color: var(--white); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .masthead-eyebrow { animation: fadeUp .5s ease both .1s; }
+  .masthead h1      { animation: fadeUp .6s ease both .2s; }
+  .masthead-meta    { animation: fadeUp .6s ease both .35s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .masthead-inner, .main-wrap { padding-left: 20px; padding-right: 20px; }
+    .exec-summary { padding: 40px 20px; }
+    .exec-summary-inner { grid-template-columns: 1fr; gap: 32px; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .data-cards { grid-template-columns: 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .price-tiers { grid-template-columns: 1fr; }
+    .channel-grid { grid-template-columns: 1fr; }
+    .section-num { font-size: 48px; }
+    .comp-table { font-size: 12px; }
+    .nav-bar-inner { padding-left: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-bg-text">RESEARCH</div>
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">Second Sight — Confidential Research Report</div>
+    <h1>The AI Activation<br><em>Opportunity</em><br>in Australian Mid-Market</h1>
+    <div class="masthead-meta">
+      <span>March 2026</span>
+      <span>Five research sections</span>
+      <span>Top 5 risks assessed</span>
+      <span>v1.0</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-bar-inner">
+    <a href="#exec">Summary</a>
+    <a href="#s1">Market Validation</a>
+    <a href="#s2">Competitive Landscape</a>
+    <a href="#s3">Buyer Profile</a>
+    <a href="#s4">Pricing</a>
+    <a href="#s5">Go-to-Market</a>
+    <a href="#risks">Top 5 Risks</a>
+  </div>
+</nav>
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="exec-summary" id="exec">
+  <div class="exec-summary-inner">
+    <div>
+      <div class="exec-label">Executive Summary</div>
+      <h2>The execution gap is real — and validated.</h2>
+      <p>The core hypothesis behind the AI Activation Workshop — that Australian SMBs have AI strategies but are stalling at execution — is <strong style="color:var(--amber)">strongly validated</strong> by at least eight independent Australian sources published in 2024–2026.</p>
+      <p style="margin-top:14px">A clear competitive gap exists in the 50–500 employee mid-market. No Australian firm currently offers a productised, fixed-price AI activation workshop specifically bridging strategy to execution. The opportunity is real, but five meaningful risks must be managed.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-num">4%</div>
+        <div class="stat-label">Australian businesses fully prepared to deploy AI (Cisco, 2024)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">78%</div>
+        <div class="stat-label">Of boards treat AI as a strategic priority (ADAPT, 2025)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">72%</div>
+        <div class="stat-label">Fail to achieve measurable AI ROI (ADAPT, 2025)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">12%</div>
+        <div class="stat-label">Of AU leaders say AI is transforming their business vs 25% globally (Deloitte, 2026)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- S1 -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <div class="section-label">Research Area</div>
+        <h2>Market Validation</h2>
+      </div>
+    </div>
+    <div class="evidence-badge strong">Strong Evidence</div>
+    <div class="body-text">
+      <p>The evidence for an AI execution gap — as distinct from a strategy gap — is the strongest finding in this research. Multiple high-credibility, independent Australian sources converge on the same conclusion: ambition is high, but implementation is systematically stalling.</p>
+    </div>
+    <div class="data-cards">
+      <div class="data-card">
+        <div class="data-card-num">35%</div>
+        <div class="data-card-label">of Australian SMEs are currently adopting AI; 42% have no plans to implement</div>
+        <div class="data-card-source">Dept. Industry Science &amp; Resources, 2024</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-num">28%</div>
+        <div class="data-card-label">of AU respondents have moved 40%+ of AI pilots to production</div>
+        <div class="data-card-source">Deloitte State of AI, 2026</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-num">$28M</div>
+        <div class="data-card-label">average annual AI investment per enterprise — yet 72% report failing to achieve measurable ROI</div>
+        <div class="data-card-source">ADAPT Research, 2025</div>
+      </div>
+    </div>
+    <div class="callout">
+      <p>"Australian AI ambitions are strong, but it is time to turn intent into action." AI investment averages $28M annually per enterprise, yet 72% report failing to achieve measurable ROI — and the shortfall in mid-market firms is 71%.</p>
+      <div class="callout-source">ADAPT Research — State of Data &amp; AI in Australia, 2025</div>
+    </div>
+    <div class="body-text">
+      <p><strong>Deloitte's 2026 data</strong> provides the starkest Australia-versus-global comparison: just 12% of Australian leaders report that generative AI is already transforming their business, compared to 25% globally — running at half the global transformation rate. Only 24% possess AI-ready data architectures, and only 6% mandate enterprise-wide AI training.</p>
+      <p>The <strong>Cisco AI Readiness Index 2024</strong> confirms only 4% of Australian businesses are fully prepared to deploy AI — down from 5% the prior year despite 92% acknowledging heightened urgency. 64% of organisations have provided zero AI training and 93% cannot effectively measure AI ROI. The cost of inaction is estimated at A$142 billion in economic opportunity at risk.</p>
+    </div>
+    <div class="two-col">
+      <div class="info-block">
+        <h4>Top Execution Blockers</h4>
+        <ul>
+          <li><strong>Skills &amp; talent gaps</strong> — cited by 6 major sources</li>
+          <li><strong>Data readiness &amp; quality</strong> — 5 sources</li>
+          <li><strong>Inability to measure ROI</strong> — 4 sources</li>
+          <li><strong>Legacy system integration</strong> — 3 sources</li>
+          <li><strong>Budget constraints</strong> — 3 sources</li>
+          <li><strong>Governance/regulatory uncertainty</strong> — 3 sources</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Where Evidence is Thinner</h4>
+        <ul>
+          <li>Most AU data covers SMEs broadly (&lt;200 employees) or large enterprises — the <strong>50–500 mid-market sits in a measurement gap</strong></li>
+          <li>No single Australian study cleanly asks "do you have an AI strategy vs are you executing it?" for this exact segment</li>
+          <li>ADAPT's 71% ROI shortfall for mid-market is one of very few data points explicitly targeting this band</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- S2 -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <div class="section-label">Research Area</div>
+        <h2>Competitive Landscape</h2>
+      </div>
+    </div>
+    <div class="evidence-badge medium">Medium Evidence — Market Gap Identified</div>
+    <div class="body-text">
+      <p>The Australian AI consulting market is active but structurally skewed toward enterprise clients, creating a genuine white space in the mid-market that Second Sight can exploit.</p>
+    </div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Firm</th><th>Tier</th><th>Target</th><th>Offering</th><th>Gap / Weakness</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Thoughtworks AU</strong></td>
+          <td><span class="tier-badge tier-1">Tier 1</span></td>
+          <td>Large enterprise</td>
+          <td>AI Accelerator Workshops (2–5 hrs), POC-to-production</td>
+          <td>Designed for large orgs; loss-leaders for bigger deals</td>
+        </tr>
+        <tr>
+          <td><strong>Mantel Group</strong></td>
+          <td><span class="tier-badge tier-1">Tier 1</span></td>
+          <td>Enterprise &amp; govt</td>
+          <td>AI-first consulting; AWS Strategic Collaboration</td>
+          <td>Custom project work only; no productised workshop</td>
+        </tr>
+        <tr>
+          <td><strong>Elabor8 / Cprime</strong></td>
+          <td><span class="tier-badge tier-1">Tier 1</span></td>
+          <td>Large enterprise</td>
+          <td>Agile &amp; AI transformation consulting</td>
+          <td>Enterprise pricing; not accessible to mid-market</td>
+        </tr>
+        <tr>
+          <td><strong>AirStack AI</strong></td>
+          <td><span class="tier-badge tier-2">Tier 2</span></td>
+          <td>ANZ SMBs</td>
+          <td>2-hr tailored workshop + AI roadmap &amp; 90-day plan</td>
+          <td>Very light-touch; no pricing transparency; limited depth</td>
+        </tr>
+        <tr>
+          <td><strong>AI Surge</strong></td>
+          <td><span class="tier-badge tier-2">Tier 2</span></td>
+          <td>Executive teams</td>
+          <td>Full-day (6.5 hr) leadership workshops with pre/post sessions</td>
+          <td>Awareness/mindset focus; not execution-oriented</td>
+        </tr>
+        <tr>
+          <td><strong>PM-Partners</strong></td>
+          <td><span class="tier-badge tier-2">Tier 2</span></td>
+          <td>Individuals/teams</td>
+          <td>Open-enrolment AI courses at AUD $795–$1,795/person</td>
+          <td>Training product, not strategic consulting; commoditised</td>
+        </tr>
+        <tr>
+          <td><strong>Arcadian Digital</strong></td>
+          <td><span class="tier-badge tier-2">Tier 2</span></td>
+          <td>Small businesses</td>
+          <td>1-hour discovery session</td>
+          <td>Too lightweight for mid-market; not execution-focused</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <p><strong>The critical gap:</strong> No prominent Australian firm offers a productised, specifically branded AI activation workshop for mid-market companies (50–500 employees) that bridges strategy to execution. Almost no one explicitly targets the "execution gap" — most workshops end at a roadmap, not implementation.</p>
+    </div>
+    <div class="two-col">
+      <div class="info-block">
+        <h4>International Benchmark: Twist Consultancy (UK)</h4>
+        <ul>
+          <li>12-week AI Adoption Accelerator for SMEs (5–200 employees)</li>
+          <li>Structured to end with a working pilot and draft AI policy — not just a plan</li>
+          <li>Best international example of addressing the execution gap in a time-boxed, productised form</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>International Benchmark: AI Accelerator UK</h4>
+        <ul>
+          <li>Multi-product ecosystem: online courses, workshops, AI Adoption Lab, consulting, community, physical AI Use Case Cards</li>
+          <li>Demonstrates how a single workshop product can expand into a scalable business</li>
+          <li>US market prices AI strategy workshops at USD $15,000–$50,000</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <div class="section-label">Research Area</div>
+        <h2>Buyer Profile &amp; Behaviour</h2>
+      </div>
+    </div>
+    <div class="evidence-badge medium">Medium–Strong Evidence (global data applied to AU context)</div>
+    <div class="body-text">
+      <p>CTOs, CPOs, and senior technology leaders at Australian SMBs are experiencing a specific and well-documented set of pressures that make them receptive to execution-focused AI help — but they are cautious buyers with significant objections to overcome.</p>
+    </div>
+    <div class="data-cards">
+      <div class="data-card">
+        <div class="data-card-num">72–74%</div>
+        <div class="data-card-label">of SMB IT purchases triggered by an acute business pain point, not proactive planning</div>
+        <div class="data-card-source">Techaisle</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-num">86%</div>
+        <div class="data-card-label">of B2B buyers say word-of-mouth is the most influential purchasing factor</div>
+        <div class="data-card-source">Global B2B research</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-num">70%</div>
+        <div class="data-card-label">of the buyer's journey is complete before first meaningful contact with a supplier</div>
+        <div class="data-card-source">Techaisle</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="info-block">
+        <h4>Purchase Triggers</h4>
+        <ul>
+          <li>Failed internal AI pilot</li>
+          <li>Competitor visibly gaining AI advantage</li>
+          <li>Board mandate with a specific deadline</li>
+          <li>Shadow AI security incident</li>
+          <li>New CTO joining the organisation</li>
+          <li>Strategic planning cycle / post-merger integration</li>
+          <li>Departure of the sole internal "AI person"</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>What Buyers Need to Believe</h4>
+        <ul>
+          <li>The consultant understands <em>their</em> specific context (not generic AI hype)</li>
+          <li>Tangible, measurable outcomes will result</li>
+          <li>The investment will demonstrably pay for itself</li>
+          <li>The workshop won't disrupt operations</li>
+          <li>The consultant has done this with companies like theirs (AU case studies essential)</li>
+          <li>Their team will be upskilled, not made dependent on external help</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-block" style="margin:24px 0">
+      <h4>Typical Decision-Making Unit (50–500 employees)</h4>
+      <p style="margin-top:8px">
+        <strong>CTO/CPO</strong> — champion and initiator &nbsp;|&nbsp;
+        <strong>CEO/MD</strong> — final decision-maker &nbsp;|&nbsp;
+        <strong>CFO</strong> — budget gatekeeper &nbsp;|&nbsp;
+        <strong>Head of Engineering/Product</strong> — technical validator
+        <br><br>
+        Below $10K: CTO may have discretionary authority. At $10K–$25K: one additional approval (CEO or CFO). Above $25K: formal CEO + CFO sign-off almost certain.
+      </p>
+    </div>
+    <div class="info-block" style="margin:24px 0">
+      <h4>Top 5 Objections to Anticipate</h4>
+      <ul>
+        <li><strong>"We have no allocated budget"</strong> — 15% of SMBs create budgets at point of decision; AI often has no dedicated line item</li>
+        <li><strong>"We can figure this out ourselves"</strong> — especially from technically proud CTOs</li>
+        <li><strong>"Let's wait until next quarter"</strong> — timing deflection when there is no acute trigger</li>
+        <li><strong>"We've had bad experiences with consultants before"</strong> — fear of generic advice and shelf-ware deliverables</li>
+        <li><strong>"That's more than we expected to spend"</strong> — sticker shock at $25K+ end without pre-anchoring on ROI</li>
+      </ul>
+    </div>
+    <div class="body-text">
+      <p><strong>Sales cycle estimate: 4–10 weeks</strong> from first meaningful conversation to signed engagement. The shorter end (4–6 weeks) applies with a strong referral, acute pain point, and single decision-maker with budget authority. The longer end (8–12+ weeks) applies when multiple stakeholders are involved or CFO approval is required. Note: sales cycles have lengthened 22% since 2022 (Optifai) due to increased budget scrutiny.</p>
+    </div>
+  </section>
+
+  <!-- S4 -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div>
+        <div class="section-label">Research Area</div>
+        <h2>Pricing Signals</h2>
+      </div>
+    </div>
+    <div class="evidence-badge medium">Medium Evidence — Benchmarks available, AU market opaque</div>
+    <div class="body-text">
+      <p>The realistic price range for the AI Activation Workshop sits in a well-supported band, though the market is opaque — almost no Australian consulting firm publishes pricing.</p>
+    </div>
+    <div class="pricing-band">
+      <h4>Recommended Pricing Architecture</h4>
+      <p class="sub">Based on AU senior AI consultant day rates of AUD $1,800–$2,500 (independent) / $3,500–$5,000+ (firm rate), plus preparation and deliverables</p>
+      <div class="price-tiers">
+        <div class="price-tier">
+          <div class="tier-name">Entry Point</div>
+          <div class="tier-price">$8–12K</div>
+          <div class="tier-desc">Half-day AI Discovery Session</div>
+          <div class="tier-note">Within CTO discretionary spend. Reduces friction to first engagement. Feeds into the full workshop.</div>
+        </div>
+        <div class="price-tier featured">
+          <div class="tier-name">Core Workshop</div>
+          <div class="tier-price">$15–25K</div>
+          <div class="tier-desc">1–2 Day AI Activation Workshop</div>
+          <div class="tier-note">Requires one additional approval (CEO or CFO). Compares to hiring an AI contractor for 2–3 months at $120K–$180K/yr.</div>
+        </div>
+        <div class="price-tier">
+          <div class="tier-name">Premium Programme</div>
+          <div class="tier-price">$30–45K</div>
+          <div class="tier-desc">Multi-session AI Transformation</div>
+          <div class="tier-note">For larger mid-market with full C-suite commitment. Formal CEO + CFO approval required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="body-text">
+      <p><strong>How buyers evaluate value</strong> at this price point: tangible deliverables (prioritised use-case matrix + implementation roadmap), time compression (months of deliberation compressed into days), risk reduction ("avoid spending $100K on the wrong AI project"), and credentials insurance (external validation reduces internal decision risk).</p>
+      <p><strong>Value-based framing works significantly better than day-rate justification.</strong> "If this workshop prevents one $100K failed pilot, it pays for itself five times over" is the right frame. Day-rate breakdowns invite price comparison to internal alternatives.</p>
+    </div>
+  </section>
+
+  <!-- S5 -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div>
+        <div class="section-label">Research Area</div>
+        <h2>Go-to-Market Channels</h2>
+      </div>
+    </div>
+    <div class="evidence-badge strong">Strong Evidence — Global data well-supported for AU context</div>
+    <div class="channel-grid">
+      <div class="channel-card">
+        <div class="channel-priority">Priority 1</div>
+        <h4>LinkedIn Thought Leadership</h4>
+        <p>Australia has ~17M LinkedIn members with one of the highest global penetration rates. LinkedIn generates 80% of all B2B leads from social media. Only 1% of users post weekly — massive opportunity for consistent founder-led content. Posts of 800–1,000 words get 26% more engagement; PDFs/carousels drive 1.9x more interaction. The ex-Accenture credential provides immediate credibility.</p>
+      </div>
+      <div class="channel-card">
+        <div class="channel-priority">Priority 2</div>
+        <h4>Strategic Event Presence</h4>
+        <p><strong>CDAO Sydney</strong> (10 Mar 2026), <strong>CDAO Brisbane</strong> (30 Mar 2026), <strong>CDAO Melbourne</strong> (1 Sep 2026), <strong>Gartner Data &amp; Analytics Summit</strong> (16–17 Jun 2026, ICC Sydney — 1,200+ peers), <strong>Enterprise AI Sydney</strong> (4 Mar 2026). Note: SXSW Sydney has been cancelled for 2026.</p>
+      </div>
+      <div class="channel-card">
+        <div class="channel-priority">Priority 3</div>
+        <h4>MSP Partnerships</h4>
+        <p>iTnews: "Australian MSPs are the critical players in safe AI adoption for SMEs." MSPs manage the identity, security, and compliance frameworks AI depends on. Key partners: <strong>First Focus</strong> (50–200 seat businesses, Microsoft Copilot consultancy), <strong>eNerds</strong> (20–500 staff). MSPs hold the relationships; Second Sight provides the expertise. Complementary, not competitive.</p>
+      </div>
+      <div class="channel-card">
+        <div class="channel-priority">Priority 4</div>
+        <h4>Cloud Vendor Programmes</h4>
+        <p>Enrol in <strong>Microsoft AI Cloud Partner Program</strong> and <strong>AWS Partner Network</strong> within 90 days. Provides co-marketing materials, workshop templates, and co-sell opportunities. Arinco (Microsoft AU Partner of the Year 2024) and Agile Insights show the model — executive breakfasts co-hosted with Microsoft, AI readiness workshops.</p>
+      </div>
+      <div class="channel-card">
+        <div class="channel-priority">Priority 5</div>
+        <h4>Industry Associations</h4>
+        <p><strong>AIIA</strong> — 100+ events annually, Manager Forums, state-based networking. <strong>ACS</strong> — 42,000+ members, Special Interest Groups in AI, IT Management, Consultants &amp; Contractors. Both provide speaking opportunities and member directories. <strong>Accenture Alumni Network</strong> is a uniquely valuable warm referral path given founders' backgrounds.</p>
+      </div>
+      <div class="channel-card">
+        <div class="channel-priority">Priority 6</div>
+        <h4>Content &amp; Media</h4>
+        <p>Contributed articles in <strong>iTnews</strong>, <strong>CRN Australia</strong>, <strong>AFR Technology</strong>, <strong>SmartCompany</strong>. Webinars co-hosted with MSP or cloud vendor partners. A proprietary research report ("State of AI Execution in Australian Mid-Market 2026") would establish authority and generate inbound leads.</p>
+      </div>
+    </div>
+    <div class="assumption-block">
+      <h4>⚠ Assumptions Not Fully Supported by Evidence</h4>
+      <ul>
+        <li>The <strong>50–500 employee segment is assumed to behave distinctly</strong> from smaller SMBs and larger enterprises, but most Australian AI adoption data covers either end. The mid-market sits in a measurement gap.</li>
+        <li>The assumption that these businesses <strong>"already have an AI strategy on paper"</strong> is partially challenged — fewer than two-thirds of the target market have a clear AI plan (Cisco), and 23% of SMEs remain unaware of AI's potential applications (NAIC).</li>
+        <li>The assumption that <strong>a 1–2 day workshop can meaningfully close the execution gap</strong> is untested in Australia — the UK's most successful model (Twist Consultancy) runs 12 weeks, and global evidence suggests pilot-to-production transitions require sustained support.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RISKS -->
+  <section class="section" id="risks">
+    <div class="section-header">
+      <div class="section-num" style="font-size:52px; color:var(--amber); line-height:1">⚡</div>
+      <div>
+        <div class="section-label">Prioritised Assessment</div>
+        <h2>Top 5 Risks to the Offer Hypothesis</h2>
+      </div>
+    </div>
+    <div class="risk-list">
+      <div class="risk-item">
+        <div class="risk-num">1</div>
+        <div class="risk-content">
+          <h4>The Workshop-to-Implementation Gap</h4>
+          <p>The strongest risk is that a 1–2 day workshop delivers a roadmap but does not ensure execution — replicating the very problem Second Sight claims to solve. With 72% of Australian enterprises failing to achieve AI ROI (ADAPT), buyers are primed to be sceptical of yet another deliverable that sits on a shelf. The Twist Consultancy 12-week model and AI Accelerator UK's ecosystem suggest the market may demand ongoing engagement, not a standalone event.</p>
+          <span class="mitigation-tag">Build 30/60/90-day implementation support into the product from day one</span>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-num">2</div>
+        <div class="risk-content">
+          <h4>Thin Mid-Market Evidence Base</h4>
+          <p>The 50–500 employee mid-market is underserved by Australian research. Second Sight's assumptions are reasonable extrapolations but not directly validated. The segment may be internally heterogeneous — a 60-person tech startup and a 400-person manufacturing firm have very different AI needs, buying processes, and budget authorities.</p>
+          <span class="mitigation-tag">Conduct primary research with 15–20 target buyers before finalising the offer</span>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-num">3</div>
+        <div class="risk-content">
+          <h4>Competitive Convergence</h4>
+          <p>While the mid-market gap currently exists, it is visible to every competitor. Mantel Group, Thoughtworks, AirStack AI, AI Surge, and the Big 4 are all investing in AI services. The barrier to entry for "a 1–2 day AI workshop" is low — any established consultancy could launch a comparable product within weeks. The ex-Accenture credential differentiates initially but is not defensible long-term.</p>
+          <span class="mitigation-tag">Move fast; build proprietary frameworks and IP that create switching costs</span>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-num">4</div>
+        <div class="risk-content">
+          <h4>Price Sensitivity &amp; Sales Cycle Friction</h4>
+          <p>At $25,000–$50,000, the engagement requires CEO/CFO approval and competes with hiring a contractor for 2–3 months, purchasing AI SaaS tools, or running internal experiments with free tools. Sales cycles of 8–12 weeks at this price point strain a boutique firm's cash flow and pipeline predictability. 15% of SMBs create budgets at time of purchase decision — AI consulting often lacks a pre-existing budget line.</p>
+          <span class="mitigation-tag">Anchor at $15–20K; design a $5–8K diagnostic entry point; develop compelling ROI framing</span>
+        </div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-num">5</div>
+        <div class="risk-content">
+          <h4>Some Target Buyers May Need Strategy, Not Activation</h4>
+          <p>23% of Australian SMEs remain unaware of AI's potential applications (NAIC), and 42% have no plans to implement. Cisco found fewer than two-thirds have a clear AI plan. This means a meaningful portion of the addressable market is not yet at the "we have a strategy but can't execute" stage — they may need foundational education or strategy development first. Positioning exclusively around "activation" could narrow the addressable market more than intended.</p>
+          <span class="mitigation-tag">Design to accommodate multiple maturity stages; consider a lighter AI Foundations diagnostic</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+  <strong>Second Sight</strong> — AI Activation Market Research · March 2026 · Confidential<br>
+  <span style="margin-top:6px;display:block">Sources: ADAPT Research, Deloitte Australia, Cisco AI Readiness Index, Dept. Industry Science &amp; Resources, Tech Council of Australia, McKinsey, Techaisle, iTnews, Thoughtworks, Mantel Group, AirStack AI, AI Surge, PM-Partners, Twist Consultancy UK</span>
+</footer>
+
+</body>
+</html>
